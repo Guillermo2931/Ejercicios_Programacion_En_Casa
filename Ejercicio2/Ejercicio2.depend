@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1678813662 source:c:\users\fuken\documents\ejercicios hp\ejercicio2\main.cpp
+	<windows.h>
+	<iostream>
+	<string>
+	<fstream>
+	<filesystem>
+

@@ -1,0 +1,9 @@
+Para el segundo ejercicio se usa la libreria windows.h que proporciona diferentes herramientas para la navegación de archivos, en este caso usaremos FIND_DATA, es importante mencionar que debido a esto solo funciona en el sistema operativo windows
+Primero se toma la dirección que proporciona el usuario y se le agrega un "/" para el funcionamiento adecuado de las funciones.
+Se decalara e inicia todo lo necesario respecto al archivo json que se va a crear, dando un nombre y creando una variable ofstream para el archivo, así como iniciar el FIND_DATA.
+Se escribe el inicio del json basado en lo que se requiere y empezamos la búsqueda de archivos.
+Primero con  if (auto handle = FindFirstFile((a_carpeta + "/*.*").c_str(), &ffd)) se verifica que exista la carpeta y se apunta en su dirección para recorrerla posteriormente.
+Se recorrerá la carpeta archivo por archivo, tomando en cuenta 2 cosas importantes, que al recorrer no elijamos una subcarpeta ya que podría causar error y que no sea el primer elemento en agregarse al archivo, ya que añadiría una "," extra en el json. Para solucionar el primer problema se usa if(!(ffd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)), esto nos permite saber si lo que vamos a escribir no es una subcarpeta de la carpeta original, ya que no se debería listar en el json, además se previenen errores.
+Al tener nuestros archivos vamos a ir complementando el json escribiendo los datos correspondintes, usando ffd.cFileName para obtener el nombre del archivo y escrbirlo y usaremosstd::filesystem::file_size(a_carpeta+ffd.cFileName) para obtener el tamaño de nuestro archivo en bytes. Esto se realiza hasta no encontrar archivos en el directorio que se proporcionó. Al finalizar solo se completa el json y se cierra el archivo.
+Nota: es importante que la dirección tenga diagonales en ella y no diagonales invertidas ya que podrías causar error.
+Ejemplo de forma correcta de escribir la dirección: C:\Users\Usuario1\Documents
